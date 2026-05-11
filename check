@@ -1,0 +1,31 @@
+// CHECK BALANCE
+void checkBalance()
+{
+    long long accNo;
+    bool found = false;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accNo;
+
+    Account acc;
+
+    ifstream file("bank.dat", ios::binary);
+
+    while (file.read(reinterpret_cast<char*>(&acc), sizeof(Account)))
+    {
+        if (acc.getAccountNumber() == accNo)
+        {
+            cout << "\nCurrent Balance : " << acc.getBalance() << endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount Not Found!\n";
+    }
+
+    file.close();
+}
