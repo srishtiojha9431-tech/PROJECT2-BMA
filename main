@@ -1,0 +1,58 @@
+// MAIN FUNCTION
+int main()
+{
+    int choice;
+
+    do
+    {
+        cout << "\n========== BANK MANAGEMENT SYSTEM ==========\n";
+        cout << "1. Create New Account\n";
+        cout << "2. Display All Accounts\n";
+        cout << "3. Search Account\n";
+        cout << "4. Deposit Amount\n";
+        cout << "5. Withdraw Amount\n";
+        cout << "6. Check Balance\n";
+        cout << "7. Exit\n";
+        cout << "============================================\n";
+
+        cout << "Enter Your Choice : ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            createNewAccount();
+            break;
+
+        case 2:
+            displayAllAccounts();
+            break;
+
+        case 3:
+            searchAccount();
+            break;
+
+        case 4:
+            depositAmount();
+            break;
+
+        case 5:
+            withdrawAmount();
+            break;
+
+        case 6:
+            checkBalance();
+            break;
+
+        case 7:
+            cout << "\nThank You For Using Bank Management System!\n";
+            break;
+
+        default:
+            cout << "\nInvalid Choice! Please Try Again.\n";
+        }
+
+    } while (choice != 7);
+
+    return 0;
+}
