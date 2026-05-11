@@ -1,0 +1,21 @@
+// CREATE ACCOUNT
+void createNewAccount()
+{
+    Account acc;
+
+    ofstream file("bank.dat", ios::binary | ios::app);
+
+    if (!file)
+    {
+        cout << "\nError Opening File!\n";
+        return;
+    }
+
+    acc.createAccount();
+
+    file.write(reinterpret_cast<char*>(&acc), sizeof(Account));
+
+    file.close();
+
+    cout << "\nAccount Created Successfully!\n";
+}
