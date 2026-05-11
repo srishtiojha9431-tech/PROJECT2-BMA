@@ -1,0 +1,57 @@
+class Account
+{
+private:
+    long long accountNumber;
+    char name[50];
+    double balance;
+
+public:
+    void createAccount()
+    {
+        cout << "\nEnter Account Number : ";
+        cin >> accountNumber;
+
+        cin.ignore();
+
+        cout << "Enter Customer Name  : ";
+        cin.getline(name, 50);
+
+        cout << "Enter Initial Balance: ";
+        cin >> balance;
+    }
+
+    void displayAccount()
+    {
+        cout << "\n================================";
+        cout << "\nAccount Number : " << accountNumber;
+        cout << "\nCustomer Name  : " << name;
+        cout << "\nCurrent Balance: " << balance;
+        cout << "\n================================\n";
+    }
+
+    long long getAccountNumber()
+    {
+        return accountNumber;
+    }
+
+    double getBalance()
+    {
+        return balance;
+    }
+
+    void deposit(double amount)
+    {
+        balance += amount;
+    }
+
+    bool withdraw(double amount)
+    {
+        if (amount > balance)
+        {
+            return false;
+        }
+
+        balance -= amount;
+        return true;
+    }
+};
