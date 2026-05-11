@@ -1,0 +1,48 @@
+// DISPLAY ALL ACCOUNTS
+void displayAllAccounts()
+{
+    Account acc;
+
+    ifstream file("bank.dat", ios::binary);
+
+    if (!file)
+    {
+        cout << "\nNo Accounts Found!\n";
+        return;
+    }
+
+    cout << "\n========== ACCOUNT DETAILS ==========\n";
+
+    bool found = false;
+
+    while (true)
+    {
+        file.read(reinterpret_cast<char*>(&acc), sizeof(Account));
+
+        // STOP when file reading ends
+        if (file.eof())
+        {
+            break;
+        }
+
+        // CHECK invalid/corrupted data
+        if (file.fail())
+        {
+            break;
+        }
+
+        // DISPLAY only valid accounts
+        if (acc.getAccountNumber() > 0)
+        {
+            acc.displayAccount();
+            found = true;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nNo Valid Accounts Available!\n";
+    }
+
+    file.close();
+}
