@@ -1,0 +1,46 @@
+// WITHDRAW MONEY
+void withdrawAmount()
+{
+    long long accNo;
+    double amount;
+    bool found = false;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accNo;
+
+    cout << "Enter Withdraw Amount : ";
+    cin >> amount;
+
+    Account acc;
+
+    fstream file("bank.dat", ios::binary | ios::in | ios::out);
+
+    while (file.read(reinterpret_cast<char*>(&acc), sizeof(Account)))
+    {
+        if (acc.getAccountNumber() == accNo)
+        {
+            if (acc.withdraw(amount))
+            {
+                file.seekp(-static_cast<int>(sizeof(Account)), ios::cur);
+
+                file.write(reinterpret_cast<char*>(&acc), sizeof(Account));
+
+                cout << "\nWithdrawal Successful!\n";
+            }
+            else
+            {
+                cout << "\nInsufficient Balance!\n";
+            }
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount Not Found!\n";
+    }
+
+    file.close();
+}
