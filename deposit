@@ -1,0 +1,42 @@
+// DEPOSIT MONEY
+void depositAmount()
+{
+    long long accNo;
+    double amount;
+    bool found = false;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accNo;
+
+    cout << "Enter Deposit Amount : ";
+    cin >> amount;
+
+    Account acc;
+
+    fstream file("bank.dat", ios::binary | ios::in | ios::out);
+
+    while (file.read(reinterpret_cast<char*>(&acc), sizeof(Account)))
+    {
+        if (acc.getAccountNumber() == accNo)
+        {
+            acc.deposit(amount);
+
+            file.seekp(-static_cast<int>(sizeof(Account)), ios::cur);
+
+            file.write(reinterpret_cast<char*>(&acc), sizeof(Account));
+
+            cout << "\nAmount Deposited Successfully!\n";
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount Not Found!\n";
+    }
+
+    file.close();
+}
+
